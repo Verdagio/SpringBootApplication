@@ -3,6 +3,7 @@ package com.sales.controllers;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/addCustomers", method = RequestMethod.POST)
-	public String postCustomers(@ModelAttribute("customer1") Customer c, BindingResult res, HttpServletRequest req, Model m){
+	public String postCustomers(@Valid @ModelAttribute("customer1") Customer c, BindingResult res, HttpServletRequest req, Model m){
 		
 		LinkedList<Customer> customers;
 		
@@ -38,7 +39,7 @@ public class CustomerController {
 			try{
 				cServe.save(c);									//save the customer to the list
 				
-				customers = cServe.getList();					// put the list into the list...
+				customers = cServe.getAll();					// put the list into the list...
 				
 				for(Customer tmp : customers){					//for each customer in the list
 					System.out.println(tmp.getcId());			//print stuff
@@ -65,7 +66,7 @@ public class CustomerController {
 	public void listCustomers(Model m){
 		
 		//list customers in the list
-		LinkedList<Customer> customers = cServe.getList();
+		LinkedList<Customer> customers = cServe.getAll();
 		
 		for(Customer c : customers){
 			

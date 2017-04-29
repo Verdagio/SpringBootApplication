@@ -14,7 +14,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
-	public LinkedList<Customer> getList(){
+	public LinkedList<Customer> getAll(){
 		
 		return (LinkedList <Customer>) customerRepository.findAll();
 	}//get list

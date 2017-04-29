@@ -23,7 +23,7 @@
 		<a href="/">Home</a>
 		<a href="/listOrders">List Orders</a>
 		<a href="/listProducts">List Products</a>
-		<a href="/signOut">Sign Out</a>
+		<a href="/logout">Log Out</a>
 	</form:form>
 </body>
 </html>

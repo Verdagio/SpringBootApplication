@@ -3,6 +3,7 @@ package com.sales.controllers;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class ProductController {
 	}//get prods
 	
 	@RequestMapping(value = "/addProducts", method = RequestMethod.POST)
-	public String postProduct(@ModelAttribute("product1") Product p, BindingResult res, HttpServletRequest req, Model m){
+	public String postProduct(@Valid @ModelAttribute("product1") Product p, BindingResult res, HttpServletRequest req, Model m){
 		LinkedList <Product> products;
 		
 		if(!res.hasErrors()){
