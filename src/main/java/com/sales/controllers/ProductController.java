@@ -22,7 +22,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping(value = "/showProducts")
+	@RequestMapping(value = "/showProducts", method = RequestMethod.GET)
 	public String showProducts(Model m){
 		ArrayList<Product> products = productService.getList();
 		//for each product in the list print it out		
@@ -31,12 +31,12 @@ public class ProductController {
 		return "showProducts";
 	}//list products
 	
-	@RequestMapping(value = "/addProducts", method = RequestMethod.GET)
+	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public String getProduct(@ModelAttribute ("product1") Product p){
 		return "addProduct";
 	}//get prods
 	
-	@RequestMapping(value = "/addProducts", method = RequestMethod.POST)
+	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
 	public String postProduct(@Valid @ModelAttribute("product1") Product p, BindingResult res, HttpServletRequest req, Model m){
 		ArrayList <Product> products;
 		
@@ -45,6 +45,6 @@ public class ProductController {
 				products = productService.getList();
 				m.addAttribute("products", products);
 				return "showProducts";
-		} else {	return "addProducts";	}//if else if
+		} else {	return "addProduct";	}//if else if
 	}//post products
 }

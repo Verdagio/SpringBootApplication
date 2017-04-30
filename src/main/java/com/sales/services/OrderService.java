@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sales.exceptions.InvalidIdException;
+import com.sales.exceptions.StockQtyException;
 import com.sales.models.Customer;
 import com.sales.models.Order;
 import com.sales.models.Product;
@@ -44,12 +45,23 @@ public class OrderService {
 		customer = customerRepository.findOne(order.getCust().getcId());
 		product = productRepository.findOne(order.getProd().getpId());
 		
-		if(customer == null || product == null){
-			throw new InvalidIdException("May not be empty");
-		} else if (order.getCust().getcId() != customer.getcId() || order.getProd().getpId() != product.getpId()){
-			throw new InvalidIdException("Invalid Id");
+
+		if(customer == null ){											// null id passed
+			throw new InvalidIdException("Customer id may not be empty");
+		} else if (product == null){									// null id passed
+			throw new InvalidIdException("Product id may not be empty");
+		} else if (order.getCust().getcId() != customer.getcId()){		// wrong cust id
+			throw new InvalidIdException("Invalid customer Id");
+		} else if( order.getProd().getpId() != product.getpId()){		//wrong prod id
+			throw new InvalidIdException("Invalid product Id");
 		} else {
-			product.setQtyInStock(product.getQtyInStock() - order.getQty());
+			
+			if(product.getQtyInStock() > order.getQty()){
+				product.setQtyInStock(product.getQtyInStock() - order.getQty());
+				
+			} else { //if there isn't enough stock throw an error
+				throw new StockQtyException("Insufficient stock!! stock available = " + product.getQtyInStock()); 
+			}
 			order.setOrderDate(df.format(date));
 			order.getCust().setcName(customer.getcName());
 			order.getProd().setpDesc(product.getpDesc());
