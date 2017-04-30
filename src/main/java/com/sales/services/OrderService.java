@@ -3,8 +3,8 @@ package com.sales.services;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +34,9 @@ public class OrderService {
 	private Customer customer;
 	private Product product;
 	
-	public LinkedList<Order> getList(){
+	public ArrayList<Order> getList(){
 		
-		return (LinkedList<Order>) orderRepository.findAll();
+		return (ArrayList<Order>) orderRepository.findAll();
 	}// get list
 	
 	public Order save(Order order) throws Exception{

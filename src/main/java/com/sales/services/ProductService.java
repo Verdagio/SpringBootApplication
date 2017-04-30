@@ -1,6 +1,6 @@
 package com.sales.services;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public LinkedList<Product> getList(){
-		return (LinkedList<Product>) productRepository.findAll();
+	public ArrayList<Product> getList(){
+		return (ArrayList<Product>) productRepository.findAll();
 	}//get list
 	
 	public Product save(Product p){

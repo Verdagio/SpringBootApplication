@@ -1,6 +1,6 @@
 package com.sales.controllers;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -20,48 +20,31 @@ import com.sales.services.ProductService;
 public class ProductController {
 	
 	@Autowired
-	private ProductService pServe;
+	private ProductService productService;
+	
+	@RequestMapping(value = "/showProducts")
+	public String showProducts(Model m){
+		ArrayList<Product> products = productService.getList();
+		//for each product in the list print it out		
+		m.addAttribute("products", products);
+		
+		return "showProducts";
+	}//list products
 	
 	@RequestMapping(value = "/addProducts", method = RequestMethod.GET)
 	public String getProduct(@ModelAttribute ("product1") Product p){
-		return "addProductPage";
+		return "addProduct";
 	}//get prods
 	
 	@RequestMapping(value = "/addProducts", method = RequestMethod.POST)
 	public String postProduct(@Valid @ModelAttribute("product1") Product p, BindingResult res, HttpServletRequest req, Model m){
-		LinkedList <Product> products;
+		ArrayList <Product> products;
 		
-		if(!res.hasErrors()){
-			try{
-				pServe.save(p);
-				
-				products = pServe.getList();
-				
-				for(Product tmp : products){
-					System.out.println(tmp.getpId());
-				}//for
-				
+		if(!(res.hasErrors())){
+				productService.save(p);
+				products = productService.getList();
 				m.addAttribute("products", products);
-				
-				return "listProducts";
-			}catch(Exception e){
-				e.printStackTrace();
-				return "listProducts";
-			}// try catch
-
+				return "showProducts";
 		} else {	return "addProducts";	}//if else if
 	}//post products
-	
-	@RequestMapping(value = "/listProducts")
-	public void listProducts(Model m){
-		LinkedList<Product> products = pServe.getList();
-		//for each product in the list print it out
-		for(Product tmp : products){
-			System.out.println(tmp.getpId());
-		}//for
-		
-		m.addAttribute("products", products);
-	}//list products
-	
-	
 }

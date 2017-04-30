@@ -1,6 +1,6 @@
 package com.sales.controllers;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,46 +21,31 @@ public class OrderController {
 	@Autowired
 	private OrderService oServe;
 
-	@RequestMapping(value = "/addOrders", method = RequestMethod.GET)
+	@RequestMapping(value = "/showOrders", method = RequestMethod.GET)
+	public String showOrders(Model m){
+		ArrayList<Order> orders = oServe.getList();
+		m.addAttribute("orders", orders);		
+		return "showOrders";
+	}//list orders
+
+	@RequestMapping(value = "/addOrder", method = RequestMethod.GET)
 	public String getOrder(@ModelAttribute("order1") Order o, HttpServletRequest req){
-		return "addOrders";
+		return "addOrder";
 	}//get orders
 	
-	@RequestMapping(value = "/addOrders", method = RequestMethod.POST)
-	public String postOrders(@ModelAttribute("order1") Order o, BindingResult res, HttpServletRequest req, Model m){
+	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
+	public String postOrders(@ModelAttribute("order1") Order o, BindingResult res, HttpServletRequest req, Model m) throws Exception{
 		
-		LinkedList<Order> orders;
+		ArrayList<Order> orders;
 		
 		if(!res.hasErrors()){
-			try{
-				oServe.save(o);
-				
-				orders = oServe.getList();
-				
-				for(Order tmp : orders){
-					System.out.println(tmp.getoId());
-				}
-				
-				m.addAttribute("orders", orders);
-				
-				return "listOrders";
-			}catch(Exception e){
-				e.printStackTrace();
-				return "listOrders";
-			}//try / catch
 
+				oServe.save(o);			
+				orders = oServe.getList();
+				m.addAttribute("orders", orders);				
+				return "showOrders";
 			
-		}else{	return "addOrders";	}//if else
+		}else{	return "addOrder";	}//if else
 	}//post orders
-	
-	@RequestMapping(value = "listOrders")
-	public void listOrders(Model m){
-		LinkedList<Order> orders = oServe.getList();
-		
-		for(Order o : orders){
-			System.out.println(o.getoId());
-		}//for
-		
-		m.addAttribute("orders", orders);
-	}//list orders
+
 }
