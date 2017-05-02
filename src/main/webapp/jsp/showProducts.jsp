@@ -31,9 +31,9 @@ table, th, td {
 		</tr>
 	</table>
 	<a href="/">Home</a>
-	<a href="/addProducts">Add Product</a>
-	<a href="/listProducts">List Products</a>
-	<a href="/listOrders">List Orders</a>
+	<a href="/addProduct">Add Product</a>
+	<a href="/showCustomers">List Customers</a>
+	<a href="/showOrders">List Orders</a>
 	<a href="/logout">Log out</a>
 </body>
 </html>

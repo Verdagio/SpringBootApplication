@@ -8,21 +8,21 @@
 <title>Add Customer</title>
 </head>
 <body>
-	<form:form modelAttribute="customer1">
+	<form:form modelAttribute="newCustomer">
 		<h1>Add new customer</h1>
 		<table>
 			<tr>
 				<td>Name</td>
 				<td><form:input path="cName"></form:input></td>
-				<td><form:errors path="cName"></form:errors></td>
+				<td><form:errors path="cName">may not be empty</form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="3"><input type="submit" value="Add"/></td>
 			</tr>
 		</table>
 		<a href="/">Home</a>
-		<a href="/listOrders">List Orders</a>
-		<a href="/listProducts">List Products</a>
+		<a href="/showOrders">List Orders</a>
+		<a href="/showProducts">List Products</a>
 		<a href="/logout">Log Out</a>
 	</form:form>
 </body>

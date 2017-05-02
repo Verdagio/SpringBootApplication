@@ -35,13 +35,13 @@ public class CustomerController {
 	}//list customers
 	
 	@RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
-	public String getCustomers(@ModelAttribute("customer1") Customer c, HttpServletRequest req){
+	public String getCustomers(@ModelAttribute("newCustomer") Customer c, HttpServletRequest req){
 		
 		return "addCustomer";
 	}
 	
 	@RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
-	public String postCustomers(@Valid @ModelAttribute("customer1") Customer c, BindingResult res, HttpServletRequest req, Model m){
+	public String postCustomers(@Valid @ModelAttribute("newCustomer") Customer c, BindingResult res, HttpServletRequest req, Model m){
 		
 		ArrayList<Customer> customers;
 		

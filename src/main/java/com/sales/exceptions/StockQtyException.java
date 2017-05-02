@@ -5,6 +5,7 @@ public class StockQtyException extends Exception {
 
 	public StockQtyException(String e){
 		super(e);	
+
 	}
-	
+
 }

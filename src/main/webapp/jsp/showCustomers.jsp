@@ -36,9 +36,9 @@ table, th, td {
 		</table>
 	</c:forEach>
 	<a href="/">Home</a>
-	<a href="/addCustomers">Add Customer</a>
-	<a href="/listProducts">List Products</a>
-	<a href="/listOrders">List Orders</a>
+	<a href="/addCustomer">Add Customer</a>
+	<a href="/showProducts">List Products</a>
+	<a href="/showOrders">List Orders</a>
 	<a href="/logout">Log out</a>
 </body>
 </html>

@@ -32,12 +32,12 @@ public class ProductController {
 	}//list products
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
-	public String getProduct(@ModelAttribute ("product1") Product p){
+	public String getProduct(@ModelAttribute ("newProduct") Product p){
 		return "addProduct";
 	}//get prods
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public String postProduct(@Valid @ModelAttribute("product1") Product p, BindingResult res, HttpServletRequest req, Model m){
+	public String postProduct(@Valid @ModelAttribute("newProduct") Product p, BindingResult res, HttpServletRequest req, Model m){
 		ArrayList <Product> products;
 		
 		if(!(res.hasErrors())){

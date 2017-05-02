@@ -8,25 +8,25 @@
 <title>Add products</title>
 </head>
 <body>
-	<form:form modelAttribute="product1">
+	<form:form modelAttribute="newProduct">
 		<h1>Add new product</h1>
 		<table>
 			<tr>
 				<td>Product Description</td>
 				<td><form:input path="pDesc"></form:input></td>
-				<td><form:errors path="pDesc"></form:errors></td>
+				<td><form:errors path="pDesc">may not be empty</form:errors></td>
 			</tr>
 			<tr>
 				<td>Quantity in Stock</td>
 				<td><form:input path="qtyInStock"></form:input></td>
-				<td><form:errors path="qtyInStock"></form:errors></td>
+				<td><form:errors path="qtyInStock">must be greater than 0</form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="3"><input type="submit" value="Add"/></td>
 		</table>
 		<a href="/">Home</a>
-		<a href="/listOrders">List Orders</a>
-		<a href="/listProducts">List Products</a>
+		<a href="/showOrders">List Orders</a>
+		<a href="/showProducts">List Products</a>
 	</form:form>
 </body>
 </html>

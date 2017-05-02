@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sales.exceptions.*;
 import com.sales.models.Order;
 import com.sales.services.OrderService;
 
@@ -29,23 +30,34 @@ public class OrderController {
 	}//list orders
 
 	@RequestMapping(value = "/addOrder", method = RequestMethod.GET)
-	public String getOrder(@ModelAttribute("order1") Order o, HttpServletRequest req){
+	public String getOrder(@ModelAttribute("newOrder") Order o, HttpServletRequest req){
 		return "addOrder";
 	}//get orders
 	
-	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
-	public String postOrders(@ModelAttribute("order1") Order o, BindingResult res, HttpServletRequest req, Model m) throws Exception{
-		
+	@RequestMapping(value = "/addOrder", method = RequestMethod.POST) 
+	public String postOrders(@ModelAttribute("newOrder") Order o, BindingResult res, HttpServletRequest req, Model m)  {
 		ArrayList<Order> orders;
-		
-		if(!res.hasErrors()){
 
-				oServe.save(o);			
-				orders = oServe.getList();
-				m.addAttribute("orders", orders);				
-				return "showOrders";
-			
-		}else{	return "addOrder";	}//if else
+				if(!(res.hasErrors())){
+					try{
+						oServe.save(o);
+						orders = oServe.getList();
+						m.addAttribute("orders", orders);				
+						return "showOrders";
+					}catch(NullCIdException | NullPIdException | StockQtyException | InvalidIdException e){
+						
+						m.addAttribute("message", e.getMessage());
+						m.addAttribute("cId", o.getCust().getcId());
+						m.addAttribute("pId", o.getProd().getpId());
+						m.addAttribute("qty", o.getQty());
+						return "oops";
+					}
+				}else{
+					return "addOrder";
+				}
+				
 	}//post orders
+
+
 
 }

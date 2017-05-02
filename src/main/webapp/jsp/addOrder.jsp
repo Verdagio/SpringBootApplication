@@ -6,21 +6,23 @@
 <title>Add Orders</title>
 </head>
 <body>
-	<form:form modelAttribute="order1">
+	<form:form modelAttribute="newOrder">
 		<h1>Add Order</h1>
 		<table>
 			<tr>
 				<td>Customer id:</td>
 				<td><form:input path="cust.cId"></form:input></td>
+				<td><form:errors path="qty">may not be empty</form:errors></td>
 			</tr>
 			<tr>
 				<td>Product id:</td>
 				<td><form:input path="prod.pId"></form:input></td>
+				<td><form:errors path="qty">may not be empty</form:errors></td>
 			</tr>
 			<tr>
 				<td>Quantity:</td>
 				<td><form:input path="qty"></form:input></td>
-				<td><form:errors path="qty"></form:errors></td>
+				<td><form:errors path="qty">must be greater than 0</form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
